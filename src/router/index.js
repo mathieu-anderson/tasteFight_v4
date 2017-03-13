@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import searchMovie from '@/components/searchMovie'
 import chooseMovie from '@/components/chooseMovie'
+import seeMovie from '@/components/seeMovie'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/which-one',
       name: 'chooseMovie',
       component: chooseMovie
+    },
+    {
+      path: '/rate-it',
+      name: 'seeMovie',
+      component: seeMovie
     }
   ]
 })
