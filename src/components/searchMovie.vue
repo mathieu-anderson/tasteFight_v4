@@ -10,44 +10,45 @@
         value="👊"
         v-on:keyup.enter="submit">
     </form>
-    Clicked: {{ $store.state.count }} times, count is {{ evenOrOdd }}.
-    <button @click="$store.dispatch('increment')">+</button>
-    <button @click="$store.dispatch('decrement')">-</button>
-    <button @click="$store.dispatch('incrementIfOdd')">Increment if odd</button>
-    <button @click="$store.dispatch('incrementAsync')">Increment async</button>
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapState } from 'vuex'
   import axios from 'axios'
 
   export default {
     name: 'searchMovie',
     data () {
       return {
-        movie_name: '',
-        TMDB_api_key: '3afb334973093028cc5d28d0464b6383',
-        api_res_movie_list: ''
+        movie_name: ''
       }
     },
-    computed: mapGetters([
-      'evenOrOdd'
-    ]),
+    computed:
+// mapState gets the state values in the store, like $store.state.value
+      mapState([
+        'TMDB_API_KEY',
+        'movieList'
+      ]),
     methods: {
+// onSubmit calls TMDB API and get the first 5 results, then redirects to the list to let the user choose what he meant
       onSubmit: function () {
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_api_key}&language=en-US&query=${this.movie_name}&page=1&include_adult=false`)
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movie_name}&page=1&include_adult=false`)
           .then(res => {
             const movieList = res.data.results.slice(0, 5)
             if (movieList.length === 0) {
               alert('nothing found :(')
               this.movie_name = ''
             } else {
-              this.api_res_movie_list = movieList
+// this is where I want to send movieList to $store.state.movieList
+              this.$store.commit('setMovieList', movieList)
               this.$router.push('/which-one')
             }
           })
-          .catch((err) => this.reload())
+          .catch(err => {
+            this.movie_name = ''
+            this.$router.push('/')
+          })
       }
     }
   }
