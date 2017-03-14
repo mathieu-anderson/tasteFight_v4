@@ -10,17 +10,25 @@
         value="👊"
         v-on:keyup.enter="submit">
     </form>
+    <br />
+    <br />
+    <Scale v-show="loading"></Scale>
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
   import axios from 'axios'
+  import Scale from 'vue-spinner/src/ScaleLoader.vue'
 
   export default {
     name: 'searchMovie',
+    components: {
+      Scale
+    },
     data () {
       return {
+        loading: false,
         movie_name: ''
       }
     },
@@ -28,22 +36,24 @@
 // mapState gets the state values in the store, like $store.state.value
       mapState([
         'TMDB_API_KEY',
-        'movieList'
+        'movieList',
+        'movieName'
       ]),
     methods: {
 // onSubmit calls TMDB API and get the first 5 results, then redirects to the list to let the user choose what he meant
       onSubmit: function () {
+        this.loading = true
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movie_name}&page=1&include_adult=false`)
           .then(res => {
-            console.log(res.data.results)
+            const movieName = this.movie_name
             const movieList = res.data.results.slice(0, 5)
             if (movieList.length === 0) {
               alert('nothing found :(')
               this.movie_name = ''
             } else {
-// this is where I want to send movieList to $store.state.movieList
+              this.$store.commit('setMovieName', movieName)
               this.$store.commit('setMovieList', movieList)
-              this.$router.push('/which-one')
+              this.$router.push(`/search/${this.movieName}`)
             }
           })
           .catch(err => {
