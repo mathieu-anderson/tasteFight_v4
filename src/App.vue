@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1 @click="reload">tasteFight</h1>
+    <h1 @click="resetApp">tasteFight</h1>
     <router-view></router-view>
   </div>
 </template>
@@ -9,9 +9,10 @@
 export default {
   name: 'app',
   methods: {
-    reload: function () {
+    resetApp: function () {
       this.$store.commit('setMovieList', [])
-      this.movie_name = ''
+      this.$store.commit('setMovieName', '')
+      this.$store.commit('setMovieData', {})
       this.$router.push('/')
     }
   }

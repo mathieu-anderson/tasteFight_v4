@@ -1,3 +1,6 @@
+<!-- BUG TO FIX
+when no res.data.poster_path is found ('null'), nothing is displayed -->
+
 <template lang="html">
   <div>
     <Scale v-show="loading"></Scale>
@@ -49,6 +52,9 @@ export default {
         this.loading = false
         this.$store.commit('setMovieData', res.data)
         this.posterURL = posterBaseURL + res.data.poster_path
+      })
+      .catch(res => {
+        this.$router.push('/')
       })
     }
 }

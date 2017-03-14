@@ -7,13 +7,12 @@
       <span
         class="pointer"
         v-for="movie in movieList"
-        v-on:click="chooseMovie(movie.id)">
+        @click="chooseMovie(movie.id)">
           <i>{{movie.original_title}}</i>
           ({{movie.release_date.slice(0,4)}})
           <br />
           <br />
       </span>
-      <!-- <span v-on:click="reload()" class="pointer">↵</span> -->
   </div>
 </template>
 
@@ -39,10 +38,6 @@
       chooseMovie: function (movieID) {
         this.movieChoiceID = movieID
         this.$router.push(`/movie/${this.movieChoiceID}`)
-      },
-      reload: function () {
-        this.$store.commit('setMovieList', [])
-        this.$router.push('/')
       }
     }
   }

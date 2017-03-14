@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="searchMovie">
-    <form v-on:submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit">
         <input
         type="text"
         placeholder="a movie to argue about"
@@ -8,11 +8,12 @@
         <input
         type="submit"
         value="👊"
-        v-on:keyup.enter="submit">
+        @keyup.enter="submit">
     </form>
     <br />
     <br />
     <Scale v-show="loading"></Scale>
+    <ChooseMovie v-show="movieName"></ChooseMovie>
   </div>
 </template>
 
@@ -20,11 +21,13 @@
   import { mapState } from 'vuex'
   import axios from 'axios'
   import Scale from 'vue-spinner/src/ScaleLoader.vue'
+  import ChooseMovie from '@/components/chooseMovie'
 
   export default {
     name: 'searchMovie',
     components: {
-      Scale
+      Scale,
+      ChooseMovie
     },
     data () {
       return {
@@ -42,6 +45,7 @@
     methods: {
 // onSubmit calls TMDB API and get the first 5 results, then redirects to the list to let the user choose what he meant
       onSubmit: function () {
+        this.$store.commit('setMovieName', '')
         this.loading = true
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movie_name}&page=1&include_adult=false`)
           .then(res => {
@@ -53,7 +57,7 @@
             } else {
               this.$store.commit('setMovieName', movieName)
               this.$store.commit('setMovieList', movieList)
-              this.$router.push(`/search/${this.movieName}`)
+              this.loading = false
             }
           })
           .catch(err => {
