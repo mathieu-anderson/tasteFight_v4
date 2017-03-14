@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 const state = {
   TMDB_API_KEY: '3afb334973093028cc5d28d0464b6383',
-  movieList: []
+  movieList: [],
+  myMovieRating: null
 }
 
 const mutations = {

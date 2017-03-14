@@ -19,7 +19,7 @@ export default new Router({
       component: chooseMovie
     },
     {
-      path: '/rate-it',
+      path: '/rate-it/:id',
       name: 'seeMovie',
       component: seeMovie
     }
