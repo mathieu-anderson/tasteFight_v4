@@ -23,31 +23,31 @@ export default {
     return {
       loading: false,
       movieID: this.$route.params.id,
-      movieData: {},
       posterURL: ''
     }
   },
   computed:
     mapState([
-      'TMDB_API_KEY'
+      'TMDB_API_KEY',
+      'movieData'
     ]),
   created:
     function loadMovieData () {
-      this.loading = true
       const posterBaseURL = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/'
+      this.loading = true
       axios.get(`https://api.themoviedb.org/3/movie/${this.movieID}?api_key=${this.TMDB_API_KEY}&language=en-US`)
       .then(res => {
         return new Promise((resolve, reject) => {
           const poster = document.createElement('img')
+          poster.src = posterBaseURL + res.data.poster_path
           poster.onload = () => {
             resolve(res)
           }
-          poster.src = posterBaseURL + res.data.poster_path
         })
       })
       .then(res => {
         this.loading = false
-        this.movieData = res.data
+        this.$store.commit('setMovieData', res.data)
         this.posterURL = posterBaseURL + res.data.poster_path
       })
     }

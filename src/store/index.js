@@ -6,8 +6,9 @@ Vue.use(Vuex)
 const state = {
   TMDB_API_KEY: '3afb334973093028cc5d28d0464b6383',
   movieList: [],
-  movieName: '',
-  myMovieRating: null
+  movieName: '', // needed for search/movieName route
+  movieData: {},
+  myMovieRating: null // maybe needed for auth related stuff?
 }
 
 const mutations = {
@@ -16,15 +17,16 @@ const mutations = {
   },
   setMovieName (state, name) {
     state.movieName = name
+  },
+  setMovieData (state, data) {
+    state.movieData = data
   }
 }
 
 const actions = {
-  setMovieList: ({ commit }) => commit('setMovieList')
 }
 
 const getters = {
-
 }
 
 export default new Vuex.Store({
