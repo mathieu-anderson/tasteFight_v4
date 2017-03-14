@@ -14,12 +14,12 @@ export default new Router({
       component: searchMovie
     },
     {
-      path: '/which-one',
+      path: '/search/:id',
       name: 'chooseMovie',
       component: chooseMovie
     },
     {
-      path: '/rate-it/:id',
+      path: '/movie/:id',
       name: 'seeMovie',
       component: seeMovie
     }
