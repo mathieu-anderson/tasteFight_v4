@@ -1,16 +1,27 @@
 <template>
   <div id="app">
+    <h1 @click="reload">tasteFight</h1>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  methods: {
+    reload: function () {
+      this.$store.commit('setMovieList', [])
+      this.movie_name = ''
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 
 <style>
+.pointer {
+  cursor: pointer;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

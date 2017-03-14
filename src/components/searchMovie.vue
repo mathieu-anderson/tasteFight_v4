@@ -35,6 +35,7 @@
       onSubmit: function () {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movie_name}&page=1&include_adult=false`)
           .then(res => {
+            console.log(res.data.results)
             const movieList = res.data.results.slice(0, 5)
             if (movieList.length === 0) {
               alert('nothing found :(')
@@ -58,8 +59,8 @@
 h1 {
   font-size: 4em;
   font-weight: bold;
-text-shadow: 1px 1px 4px rgba(150, 150, 150, 0.98);
-cursor: pointer;
+  text-shadow: 1px 1px 4px rgba(150, 150, 150, 0.98);
+  cursor: pointer;
 }
 input {
   font-size: 2em;
