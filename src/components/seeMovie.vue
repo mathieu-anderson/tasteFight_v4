@@ -37,14 +37,18 @@ export default {
       const posterBaseURL = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/'
       axios.get(`https://api.themoviedb.org/3/movie/${this.movieID}?api_key=${this.TMDB_API_KEY}&language=en-US`)
       .then(res => {
-        this.movieData = res.data
-        this.posterURL = posterBaseURL + res.data.poster_path
+        return new Promise((resolve, reject) => {
+          const poster = document.createElement('img')
+          poster.onload = () => {
+            resolve(res)
+          }
+          poster.src = posterBaseURL + res.data.poster_path
+        })
       })
       .then(res => {
         this.loading = false
-        // setTimeout(function () {
-        //   this.loading = false
-        // }, 1000)
+        this.movieData = res.data
+        this.posterURL = posterBaseURL + res.data.poster_path
       })
     }
 }
