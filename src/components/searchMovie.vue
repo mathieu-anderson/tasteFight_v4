@@ -47,24 +47,19 @@
       },
 // onSubmit calls TMDB API and get the first 5 results, then redirects to the list to let the user choose what he meant
       onSubmit: function () {
-        // this.$store.commit('setMovieName', '')
         this.loading = true
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movieName}&page=1&include_adult=false`)
           .then(res => {
-            // const movieName = this.movie_name
             const movieList = res.data.results.slice(0, 5)
             if (movieList.length === 0) {
               alert('nothing found :(')
               this.$store.commit('setMovieName', '')
-              // this.movie_name = ''
             } else {
-              // this.$store.commit('setMovieName', movieName)
               this.$store.commit('setMovieList', movieList)
               this.loading = false
             }
           })
           .catch(err => {
-            // this.movie_name = ''
             this.$store.commit('setMovieName', '')
             this.$router.push('/')
           })
