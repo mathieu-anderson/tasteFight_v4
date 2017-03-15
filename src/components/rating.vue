@@ -4,29 +4,36 @@
     <div class="star-rating">
       <label class="star-rating__star"
       v-for="rating in ratings"
-      v-bind:class="{selected: ((value >= rating && value != null))}"
-      v-on:mouseover="starOver(rating)"
-      v-on:mouseout="starOut(rating)"
-      v-on:click="setMyRating()">
-      <input
-      class="star-rating star-rating__checkbox"
-      type="radio"
-      v-model="value">
-      ♥
+      :class="{selected: ((value >= rating && value != null))}"
+      @mouseover="starOver(rating)"
+      @mouseout="starOut(rating)"
+      >
+        <input
+        @click="setMyRating(rating)"
+        class="star-rating star-rating__checkbox"
+        type="radio"
+        v-model="value">
+          ♥
       </label>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'rating',
   data () {
     return {
+      temp_value: '',
       value: '',
       ratings: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
   },
+  computed:
+    mapState([
+      'movieData'
+    ]),
   methods: {
     starOver: function (index) {
       this.temp_value = this.value
@@ -35,14 +42,18 @@ export default {
     starOut: function (index) {
       this.value = this.temp_value
     },
-    setMyRating: function () {
-      this.$store.commit('setMyMovieRating', this.value)
+    setMyRating: function (value) {
+      this.$store.commit('setMyMovieRating', value)
+      this.$router.push(`/movie/${this.movieData.id}/results`)
     }
   }
 }
 </script>
 
 <style lang="css">
+.star-rating {
+  font-size: 2em;
+}
 .star-rating__checkbox {
   position: absolute;
   overflow: hidden;
