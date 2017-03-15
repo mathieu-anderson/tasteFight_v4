@@ -9,6 +9,7 @@ when no res.data.poster_path is found ('null'), nothing is displayed -->
       <img :src='posterURL'>
       <p>{{movieData.overview}}</p>
     </div>
+    <Rating v-if="showRating"></Rating>
   </div>
 </template>
 
@@ -16,15 +17,18 @@ when no res.data.poster_path is found ('null'), nothing is displayed -->
 import { mapState } from 'vuex'
 import axios from 'axios'
 import Scale from 'vue-spinner/src/ScaleLoader.vue'
+import Rating from '@/components/rating'
 
 export default {
   name: 'seeMovie',
   components: {
-    Scale
+    Scale,
+    Rating
   },
   data () {
     return {
       loading: false,
+      showRating: false,
       movieID: this.$route.params.id,
       posterURL: ''
     }
@@ -32,7 +36,8 @@ export default {
   computed:
     mapState([
       'TMDB_API_KEY',
-      'movieData'
+      'movieData',
+      'myMovieRating'
     ]),
   created:
     function loadMovieData () {
@@ -44,6 +49,7 @@ export default {
           const poster = document.createElement('img')
           poster.src = posterBaseURL + res.data.poster_path
           poster.onload = () => {
+            this.showRating = true
             resolve(res)
           }
         })

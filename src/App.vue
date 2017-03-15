@@ -13,6 +13,7 @@ export default {
       this.$store.commit('setMovieList', [])
       this.$store.commit('setMovieName', '')
       this.$store.commit('setMovieData', {})
+      this.$store.commit('setMyMovieRating', null)
       this.$router.push('/')
     }
   }

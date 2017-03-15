@@ -4,7 +4,7 @@
         <input
         type="text"
         placeholder="a movie to argue about"
-        v-model="movie_name">
+        @input="setMovieName">
         <input
         type="submit"
         value="👊"
@@ -31,8 +31,7 @@
     },
     data () {
       return {
-        loading: false,
-        movie_name: ''
+        loading: false
       }
     },
     computed:
@@ -43,25 +42,30 @@
         'movieName'
       ]),
     methods: {
+      setMovieName: function (e) {
+        this.$store.commit('setMovieName', e.target.value)
+      },
 // onSubmit calls TMDB API and get the first 5 results, then redirects to the list to let the user choose what he meant
       onSubmit: function () {
-        this.$store.commit('setMovieName', '')
+        // this.$store.commit('setMovieName', '')
         this.loading = true
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movie_name}&page=1&include_adult=false`)
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movieName}&page=1&include_adult=false`)
           .then(res => {
-            const movieName = this.movie_name
+            // const movieName = this.movie_name
             const movieList = res.data.results.slice(0, 5)
             if (movieList.length === 0) {
               alert('nothing found :(')
-              this.movie_name = ''
+              this.$store.commit('setMovieName', '')
+              // this.movie_name = ''
             } else {
-              this.$store.commit('setMovieName', movieName)
+              // this.$store.commit('setMovieName', movieName)
               this.$store.commit('setMovieList', movieList)
               this.loading = false
             }
           })
           .catch(err => {
-            this.movie_name = ''
+            // this.movie_name = ''
+            this.$store.commit('setMovieName', '')
             this.$router.push('/')
           })
       }

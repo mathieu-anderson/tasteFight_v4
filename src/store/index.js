@@ -8,7 +8,7 @@ const state = {
   movieList: [],
   movieName: '',
   movieData: {},
-  myMovieRating: null // maybe needed for auth related stuff?
+  myMovieRating: null
 }
 
 const mutations = {
@@ -20,6 +20,9 @@ const mutations = {
   },
   setMovieData (state, data) {
     state.movieData = data
+  },
+  setMyMovieRating (state, rating) {
+    state.myMovieRating = rating
   }
 }
 

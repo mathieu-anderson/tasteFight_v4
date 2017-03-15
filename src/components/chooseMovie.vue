@@ -1,6 +1,5 @@
 <template lang="html">
   <div class="">
-    <searchMovie></searchMovie>
     <span class="">Did you mean ...</span>
       <br />
       <br />
@@ -18,13 +17,9 @@
 
 <script>
   import { mapState } from 'vuex'
-  import searchMovie from '@/components/searchMovie'
 
   export default {
     name: 'chooseMovie',
-    components: {
-      searchMovie
-    },
     data () {
       return {
         movieChoiceID: null
