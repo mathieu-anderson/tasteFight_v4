@@ -46,6 +46,7 @@ export default {
           const poster = document.createElement('img')
           if (!res.data.poster_path) {
             poster.src = 'http://placehold.it/350x450'
+            this.showRating = true
             resolve(res)
           } else {
             poster.src = posterBaseURL + res.data.poster_path
