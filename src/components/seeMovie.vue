@@ -1,6 +1,3 @@
-<!-- BUG TO FIX
-when no res.data.poster_path is found ('null'), nothing is displayed -->
-
 <template lang="html">
   <div>
     <Scale v-show="loading"></Scale>
@@ -47,17 +44,26 @@ export default {
       .then(res => {
         return new Promise((resolve, reject) => {
           const poster = document.createElement('img')
-          poster.src = posterBaseURL + res.data.poster_path
-          poster.onload = () => {
-            this.showRating = true
+          if (!res.data.poster_path) {
+            poster.src = 'http://placehold.it/350x450'
             resolve(res)
+          } else {
+            poster.src = posterBaseURL + res.data.poster_path
+            poster.onload = () => {
+              this.showRating = true
+              resolve(res)
+            }
           }
         })
       })
       .then(res => {
         this.loading = false
         this.$store.commit('setMovieData', res.data)
-        this.posterURL = posterBaseURL + res.data.poster_path
+        if (!res.data.poster_path) {
+          this.posterURL = 'http://placehold.it/350x450'
+        } else {
+          this.posterURL = posterBaseURL + res.data.poster_path
+        }
       })
       .catch(res => {
         this.$router.push('/')
