@@ -4,6 +4,7 @@
         <input
         type="text"
         placeholder="a movie to argue about"
+        :value="movieName"
         @input="setMovieName">
         <input
         type="submit"
@@ -13,7 +14,7 @@
     <br />
     <br />
     <Scale v-show="loading"></Scale>
-    <ChooseMovie v-show="movieName"></ChooseMovie>
+    <ChooseMovie v-show="movieList"></ChooseMovie>
   </div>
 </template>
 
@@ -35,7 +36,6 @@
       }
     },
     computed:
-// mapState gets the state values in the store, like $store.state.value
       mapState([
         'TMDB_API_KEY',
         'movieList',
@@ -45,8 +45,8 @@
       setMovieName: function (e) {
         this.$store.commit('setMovieName', e.target.value)
       },
-// onSubmit calls TMDB API and get the first 5 results, then redirects to the list to let the user choose what he meant
       onSubmit: function () {
+        this.$store.commit('setMovieList', null)
         this.loading = true
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movieName}&page=1&include_adult=false`)
           .then(res => {
@@ -57,6 +57,7 @@
             } else {
               this.$store.commit('setMovieList', movieList)
               this.loading = false
+              this.showMovieList = true
             }
           })
           .catch(err => {
