@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="rate">
-    How do you rate it ?
+    <h2>How do you rate it ?</h2>
     <div class="star-rating">
       <label class="star-rating__star"
       v-for="rating in ratings"
@@ -51,8 +51,11 @@ export default {
 </script>
 
 <style lang="css">
+.rate {
+  padding-top: 1em;
+}
 .star-rating {
-  font-size: 2em;
+  font-size: 1em;
 }
 .star-rating__checkbox {
   position: absolute;

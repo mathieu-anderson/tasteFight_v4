@@ -12,7 +12,6 @@
         @keyup.enter="submit">
     </form>
     <br />
-    <br />
     <Scale v-show="loading"></Scale>
     <ChooseMovie v-show="movieList"></ChooseMovie>
   </div>
@@ -71,12 +70,6 @@
 </script>
 
 <style lang="css">
-h1 {
-  font-size: 4em;
-  font-weight: bold;
-  text-shadow: 1px 1px 4px rgba(150, 150, 150, 0.98);
-  cursor: pointer;
-}
 input {
   font-size: 2em;
 }

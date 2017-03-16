@@ -1,12 +1,16 @@
 <template lang="html">
   <div>
     <Scale v-show="loading"></Scale>
-    <div v-show="!loading">
-      <h2>{{movieData.original_title}}</h2>
-      <img :src='posterURL'>
-      <p>{{movieData.overview}}</p>
+    <div class="container" v-show="!loading">
+      <span class="poster">
+        <img :src='posterURL'>
+      </span>
+      <span class="text">
+        <h2><i>{{movieData.original_title}}</i></h2>
+        <p>{{movieData.overview}}</p>
+        <Rating v-if="showRating" class="rating"></Rating>
+      </span>
     </div>
-    <Rating v-if="showRating"></Rating>
   </div>
 </template>
 
@@ -74,4 +78,23 @@ export default {
 </script>
 
 <style lang="css">
+.container {
+  display: flex;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+.poster {
+  flex: 1;
+}
+.text {
+  padding: 0.5em;
+  flex: 1 1 30vw;
+}
+.rating{
+  flex: 1 0 100vw;
+  justify-content: center;
+}
 </style>

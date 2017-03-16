@@ -24,12 +24,18 @@ export default {
 .pointer {
   cursor: pointer;
 }
+h1 {
+  font-size: 4em;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(150, 150, 150, 0.98);
+  cursor: pointer;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: -2.5em;
 }
 </style>

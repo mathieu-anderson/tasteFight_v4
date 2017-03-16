@@ -1,30 +1,40 @@
 <template lang="html">
-<div>
-  <p>
-    Your rating : {{this.myMovieRating}}
+<div class="container">
+  <div class="box1">
+    <p>
+      <h2>Your rating : {{this.myMovieRating}}</h2>
+      (The best rating!)
+      <br />
+      <br />
+      <button type="button" name="button" @click="goToHome">Again?</button>
+    </p>
     <br />
-    <button type="button" name="button" @click="goToHome">Again?</button>
-  </p>
-  <p>
-    {{this.movieData.vote_count}} people's average rating : {{this.movieData.vote_average}}
+    <p>
+      <h2>{{this.movieData.vote_count}} people's rating : {{this.movieData.vote_average}}</h2>
+      (Plebs!)
+      <br />
+      <br />
+      <a :href="url"><button type="button" name="button" v-show="!compareRatings">argue 👊</button></a>
+      <a :href="url"><button type="button" name="button" v-show="compareRatings">agree 👍</button></a>
+    </p>
+  </div>
+  <div class="box2">
+    <p>
+      <h2>RandomPhilistine's rating : 1</h2>
+      (it's really different from yours!)
+      <br />
+      <br />
+      <button type="button" name="button">argue 👊</button>
+    </p>
     <br />
-    <a :href="url"><button type="button" name="button" v-show="!compareRatings">argue 👊</button></a>
-    <a :href="url"><button type="button" name="button" v-show="compareRatings">agree 👍</button></a>
-  </p>
-  <p>
-    {randomProfileName}'s rating : {randomProfileName.movieID.rating}
-    </br>
-    (it's really different from yours!)
-    <br />
-    <button type="button" name="button">argue 👊</button>
-  </p>
-  <p>
-    {randomProfileName}'s rating : {randomProfileName.movieID.rating}
-    </br>
-    (it's really close to yours!)
-    <br />
-    <button type="button" name="button">agree 👍</button>
-  </p>
+    <p>
+      <h2>RandomPersonOfTaste's rating : 10</h2>
+      (it's really close to yours!)
+      <br />
+      <br />
+      <button type="button" name="button">agree 👍</button>
+    </p>
+  </div>
 </div>
 </template>
 
@@ -77,5 +87,8 @@ export default {
 <style lang="css">
 button{
   font-size: 1.5em;
+}
+.box1{
+  padding-right: 2em;
 }
 </style>
