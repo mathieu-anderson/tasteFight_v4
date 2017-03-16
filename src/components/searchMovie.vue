@@ -53,6 +53,7 @@
             const movieList = res.data.results.slice(0, 5)
             if (movieList.length === 0) {
               alert('nothing found :(')
+              this.loading = false
               this.$store.commit('setMovieName', '')
             } else {
               this.$store.commit('setMovieList', movieList)
