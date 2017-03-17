@@ -13,7 +13,7 @@
     </form>
     <br />
     <Scale v-show="loading"></Scale>
-    <ChooseMovie v-show="movieList"></ChooseMovie>
+    <ChooseMovie v-show="movieList.length > 0"></ChooseMovie>
   </div>
 </template>
 
@@ -45,7 +45,7 @@
         this.$store.commit('setMovieName', e.target.value)
       },
       onSubmit: function () {
-        this.$store.commit('setMovieList', null)
+        this.$store.commit('setMovieList', [])
         this.loading = true
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movieName}&page=1&include_adult=false`)
           .then(res => {

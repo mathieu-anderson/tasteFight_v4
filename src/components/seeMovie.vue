@@ -6,7 +6,7 @@
         <img :src='posterURL'>
       </span>
       <span class="text">
-        <h2><i>{{movieData.original_title}}</i></h2>
+        <h2><i>{{movieData.original_title}}</i> ({{movieData.release_date.slice(0,4)}})</h2>
         <p>{{movieData.overview}}</p>
         <Rating v-if="showRating" class="rating"></Rating>
       </span>
@@ -42,7 +42,7 @@ export default {
     ]),
   created:
     function loadMovieData () {
-      const posterBaseURL = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/'
+      const posterBaseURL = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'
       this.loading = true
       axios.get(`https://api.themoviedb.org/3/movie/${this.movieID}?api_key=${this.TMDB_API_KEY}&language=en-US`)
       .then(res => {

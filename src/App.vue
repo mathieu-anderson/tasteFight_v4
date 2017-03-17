@@ -10,8 +10,8 @@ export default {
   name: 'app',
   methods: {
     resetApp: function () {
-      this.$store.commit('setMovieList', null)
-      this.$store.commit('setMovieName', null)
+      this.$store.commit('setMovieList', [])
+      this.$store.commit('setMovieName', '')
       this.$store.commit('setMovieData', {})
       this.$store.commit('setMyMovieRating', null)
       this.$router.push('/')
