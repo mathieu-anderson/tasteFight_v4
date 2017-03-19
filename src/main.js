@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
+// Vue.config.key = process.env.API_KEY
 
 /* eslint-disable no-new */
 new Vue({

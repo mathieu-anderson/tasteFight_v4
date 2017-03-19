@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <Scale v-show="loading"></Scale>
-    <div class="container" v-show="!loading">
+    <div class="container" v-if="!loading">
       <span class="poster">
         <img :src='posterURL'>
       </span>
@@ -36,15 +36,14 @@ export default {
   },
   computed:
     mapState([
-      'TMDB_API_KEY',
       'movieData',
       'myMovieRating'
     ]),
   created:
     function loadMovieData () {
-      const posterBaseURL = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'
       this.loading = true
-      axios.get(`https://api.themoviedb.org/3/movie/${this.movieID}?api_key=${this.TMDB_API_KEY}&language=en-US`)
+      const posterBaseURL = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'
+      axios.get(`https://api.themoviedb.org/3/movie/${this.movieID}?api_key=${process.env.API_KEY}&language=en-US`)
       .then(res => {
         return new Promise((resolve, reject) => {
           const poster = document.createElement('img')

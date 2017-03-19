@@ -9,6 +9,7 @@
         <input
         type="submit"
         value="👊"
+        @click="test"
         @keyup.enter="submit">
     </form>
     <br />
@@ -36,7 +37,6 @@
     },
     computed:
       mapState([
-        'TMDB_API_KEY',
         'movieList',
         'movieName'
       ]),
@@ -47,7 +47,7 @@
       onSubmit: function () {
         this.$store.commit('setMovieList', [])
         this.loading = true
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.TMDB_API_KEY}&language=en-US&query=${this.movieName}&page=1&include_adult=false`)
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&language=en-US&query=${this.movieName}&page=1&include_adult=false`)
           .then(res => {
             const movieList = res.data.results.slice(0, 5)
             if (movieList.length === 0) {
