@@ -9,7 +9,6 @@
         <input
         type="submit"
         value="👊"
-        @click="test"
         @keyup.enter="submit">
     </form>
     <br />
@@ -43,11 +42,21 @@
     methods: {
       setMovieName: function (e) {
         this.$store.commit('setMovieName', e.target.value)
+        if (!this.movieName.length) {
+          this.loading = false
+          this.$store.commit('setMovieList', [])
+        }
       },
       onSubmit: function () {
-        this.$store.commit('setMovieList', [])
-        this.loading = true
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&language=en-US&query=${this.movieName}&page=1&include_adult=false`)
+        if (!this.movieName.length) {
+          this.$store.commit('setMovieList', [])
+          this.$store.commit('setMovieName', '')
+          this.$router.push('/')
+          this.loading = false
+        } else {
+          this.$store.commit('setMovieList', [])
+          this.loading = true
+          axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&language=en-US&query=${this.movieName}&page=1&include_adult=false`)
           .then(res => {
             const movieList = res.data.results.slice(0, 5)
             if (movieList.length === 0) {
@@ -64,6 +73,7 @@
             this.$store.commit('setMovieName', '')
             this.$router.push('/')
           })
+        }
       }
     }
   }
