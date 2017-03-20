@@ -1,12 +1,12 @@
 const express = require('express')
-const route = express.Router()
+const router = express.Router()
 
 module.exports = function(db) {
-  route.get('/:id/', getUserData)
+  router.get('/:id/', getUserData)
 
   function getUserData(req, res, next) {
     db.findUserByID('users', req.params.id)
     .then((data) => res.json(data))
   }
-  return route;
+  return router
 }

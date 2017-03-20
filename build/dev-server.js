@@ -49,6 +49,9 @@ Object.keys(proxyTable).forEach(function (context) {
   }
   app.use(proxyMiddleware(options.filter || context, options))
 })
+// 
+// // server-side routes for calling my API
+// require('./../api/')(app)
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
