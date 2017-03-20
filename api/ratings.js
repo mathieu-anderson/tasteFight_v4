@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 
 module.exports = function(db) {
-  router.get('/:id/', getUserData)
+  router.get('/:id/', getMovieData)
 
-  function getUserData(req, res, next) {
-    db.findUserByID(req.params.id)
+  function getMovieData(req, res, next) {
+    db.findMovieByID(req.params.id)
     .then((data) => res.json(data))
   }
   return router

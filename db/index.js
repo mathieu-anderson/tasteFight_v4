@@ -20,14 +20,15 @@ module.exports = function (knex) {
       })
     },
 
-    findUserByEmail: function (email) {
-      return knex('users')
+//ratings table methods
+    findMovieByID: function (id) {
+      return knex('ratings')
       .select('*')
-      .where('email', email)
-      .then((selectedUser) => {
-        return selectedUser
+      .where('movie_id', id)
+      .then((selectedMovie) => {
+        return selectedMovie
       })
     }
-    
+
   }
 }
