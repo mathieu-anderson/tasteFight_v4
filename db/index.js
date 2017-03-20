@@ -18,6 +18,16 @@ module.exports = function (knex) {
       .then((selectedUser) => {
         return selectedUser
       })
+    },
+
+//ratings table methods
+    findMovieByID: function (id) {
+      return knex('ratings')
+      .select('*')
+      .where('movie_id', id)
+      .then((selectedMovie) => {
+        return selectedMovie
+      })
     }
 
   }

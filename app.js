@@ -9,7 +9,7 @@ const api = require('./api')
 
 module.exports = function (db) {
   const app = express()
-  
+
   app.use(logger('dev'))
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -26,6 +26,7 @@ module.exports = function (db) {
 
   // routes
   app.use('/api/v1/users', api.users(db))
+  app.use('/api/v1/ratings', api.ratings(db))
 
 
   // catch 404 and forward to error handler
