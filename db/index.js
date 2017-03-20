@@ -18,16 +18,7 @@ module.exports = function (knex) {
       .then((selectedUser) => {
         return selectedUser
       })
-    },
-
-    findUserByEmail: function (email) {
-      return knex('users')
-      .select('*')
-      .where('email', email)
-      .then((selectedUser) => {
-        return selectedUser
-      })
     }
-    
+
   }
 }
