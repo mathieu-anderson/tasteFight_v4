@@ -5,5 +5,5 @@ Personal project for Enspiral Dev Academy Wellington. Pit your discerning taste 
 Objectives of this version :
 - [x] Learn how to use Vuex, the leading state management library for Vue.js.
 - [x] Learn how to implement client side routing with vue-router (v2).
-- [ ] Learn how to integrate the vue-cli Webpack template with an Express backend
+- [x] Learn how to integrate the vue-cli Webpack template with an Express backend
 - [ ] Learn how to implement authentication in Vue.js
