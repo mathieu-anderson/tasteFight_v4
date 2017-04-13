@@ -1,0 +1,10 @@
+{
+ "name": "tasteFight",
+ "version": "1.0.0",
+ "description": "Argue over things and stuff",
+ "author": "mathieu-anderson <mathieu.hj.anderson@gmail.com>",
+ "private": true,
+ "scripts": {
+   "postinstall": "npm install express"
+ }
+}
