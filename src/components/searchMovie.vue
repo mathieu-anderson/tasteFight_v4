@@ -13,7 +13,7 @@
     </form>
     <br />
     <Scale v-show="loading"></Scale>
-    <ChooseMovie v-show="movieList.length > 0"></ChooseMovie>
+    <ChooseMovie v-show="movieList.length> 0"></ChooseMovie>
   </div>
 </template>
 
