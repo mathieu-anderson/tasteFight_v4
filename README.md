@@ -14,7 +14,7 @@ Objectives of this version :
 Clone the repo in `tasteFight` directory and install dependencies :
 ```
 git clone https://github.com/mathieu-anderson/tasteFight_v4/ tasteFight
-``
+```
 
 Start local dev server on port 8080 :
 ```
