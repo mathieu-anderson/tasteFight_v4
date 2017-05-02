@@ -5,6 +5,7 @@
   "author": "mathieu-anderson <mathieu.hj.anderson@gmail.com>",
   "private": true,
   "scripts": {
+    "start": "node build/dev-server.js",
     "dev": "node build/dev-server.js",
     "db": "nodemon ./bin/www",
     "build": "node build/build.js",
