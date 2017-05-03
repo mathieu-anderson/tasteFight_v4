@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <Scale v-show="loading"></Scale>
+    <Scale v-show="loading" :color="'#2c3e50'"></Scale>
     <div class="container" v-if="!loading">
       <span class="poster">
         <img :src='posterURL'>

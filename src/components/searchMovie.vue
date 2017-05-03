@@ -12,7 +12,7 @@
         @keyup.enter="submit">
     </form>
     <br />
-    <Scale v-show="loading"></Scale>
+    <Scale v-show="loading" :color="'#2c3e50'"></Scale>
     <ChooseMovie v-show="movieList.length> 0"></ChooseMovie>
   </div>
 </template>
